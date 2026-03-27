@@ -36,3 +36,8 @@ Here are the step-by-step prompts you can use with any AI assistant to recreate 
 > You MUST use `@testing-library/user-event`.
 > For the Counter test: simulate clicking the increment button using `userEvent.click` and assert that the text changes from '0' to '1'.
 > For the FormInput test: simulate typing 'Hello' into the input using `userEvent.type`, and assert that the input value changes to 'Hello' using `expect().toHaveValue()`."
+
+---
+
+### **Prompt 6: Adding Cypress End-to-End Testing**
+> "Now I want to add Cypress to the project to handle automated end-to-end browser testing for my application layout. Please tell me how to install `cypress` alongside `start-server-and-test`. Then give me the code to create an initial E2E test file in `cypress/e2e/home.cy.js` that visits the homepage (`http://localhost:3000`) and asserts that 'To get started' is visible. Finally, please provide the exact `package.json` scripts I need: one to open Cypress (`cy`) and another to run `start-server-and-test` which starts my local dev server and runs my Cypress tests together (`test:e2e`)."
