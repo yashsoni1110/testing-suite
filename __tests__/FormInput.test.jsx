@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import FormInput from '../components/Forminput'
+import FormInput from '../components/FormInput'
 
 test('updates input value on typing', async () => {
   render(<FormInput />)
