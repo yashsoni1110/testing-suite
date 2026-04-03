@@ -1,76 +1,141 @@
-# React Component Testing Suite
+# Testing Suite — Component Testing & Storybook
 
-Welcome to the React Component Testing Suite! This project demonstrates how to set up and run both unit tests and end-to-end (E2E) tests for React components within a Next.js environment. It uses **Jest** alongside **React Testing Library** for component unit testing, and **Cypress** for end-to-end browser testing.
+A comprehensive React component development project built with **Next.js**, featuring unit testing with **Jest + React Testing Library** and an isolated component library with **Storybook**.
 
 ## 🚀 Features
 
-This project includes 5 distinct React components, covering both basic rendering and complex state interactions, fully tested with Jest:
+### Unit Testing (Jest + React Testing Library)
+5 React components with full test coverage:
 
-1. **`Button`** - A simple component that takes a `text` prop.
-2. **`Card`** - A structural component that takes a `title` prop.
-3. **`Input`** - An input field that takes a `placeholder` prop.
-4. **`Counter`** - An interactive component representing state change via button clicks.
-5. **`FormInput`** - An interactive form input representing state bindings on user typing.
+| Component | Type | Props/Features |
+|---|---|---|
+| **Button** | Static | `label`, `variant` (primary/secondary), `disabled`, `onClick` |
+| **Card** | Static | `title` |
+| **Input** | Static | `placeholder` |
+| **Counter** | Interactive | `useState` — increment count on button click |
+| **FormInput** | Interactive | `useState` — controlled input with `onChange` |
 
-It also includes **Cypress End-to-End** testing configured to automatically spin up a local development server and verify the functionality and rendering of the homepage.
+### Storybook (Component Library)
+An isolated development environment for building and previewing UI components:
 
-## 🛠️ Technologies Used
+| Story | Variants | Args/Controls |
+|---|---|---|
+| **Button** | Primary, Secondary, Disabled | `label` (text), `variant` (radio), `disabled` (boolean), `onClick` (action) |
+| **Input** | Default, WithValue | `placeholder` (text) |
+| **Counter** | Default | Interactive increment button |
 
-- **Next.js** / **React** (v19)
-- **Jest** - JavaScript Unit Testing Framework
-- **React Testing Library** (`@testing-library/react`)
-- **User Event Library** (`@testing-library/user-event`)
-- **Cypress** - End-to-End Testing Framework
-- **Start-Server-And-Test** - Utility to manage the dev server during E2E testing
+**Features:**
+- ✅ Toggle Button between Primary, Secondary, and Disabled from the control panel
+- ✅ Dark/Light mode background toggle in Storybook toolbar
+- ✅ Click action logging in the Actions panel
+
+### Cypress E2E Testing
+End-to-end browser testing configured with Cypress to verify homepage rendering.
+
+## 🛠️ Tech Stack
+
+| Technology | Version | Purpose |
+|---|---|---|
+| Next.js | 16 | React framework |
+| React | 19 | UI library |
+| Storybook | 10 | Isolated component development |
+| Jest | 29 | Unit testing framework |
+| React Testing Library | 16 | Component testing utilities |
+| Tailwind CSS | 4 | Utility-first styling |
+| Cypress | 15 | End-to-end testing |
 
 ## 📦 Getting Started
 
-First, install the necessary dependencies:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Running Unit Tests (Jest)
-
-To execute the unit and component test suite, run:
+### Run the Next.js App
 
 ```bash
-npm run test
+npm run dev
 ```
 
-This runs Jest across all `.test.jsx` files in the `__tests__` folder. 
+Opens at [http://localhost:3000](http://localhost:3000)
 
-### Running End-to-End Tests (Cypress)
+### Run Storybook (Component Library)
 
-To execute the end-to-end browser tests, run:
+```bash
+npm run storybook
+```
+
+Opens at [http://localhost:6006](http://localhost:6006) — runs independently without the Next.js app.
+
+### Run Unit Tests (Jest)
+
+```bash
+npm test
+```
+
+Runs all 5 test suites in the `__tests__/` folder.
+
+### Run E2E Tests (Cypress)
 
 ```bash
 npm run test:e2e
 ```
 
-This will automatically spin up the Next.js development server on port 3000 and launch the Cypress interactive runner to execute your `home.cy.js` specifications.
+Starts the dev server and launches Cypress to run `home.cy.js`.
+
+### Build Storybook (for deployment)
+
+```bash
+npm run build-storybook
+```
+
+Generates a `storybook-static/` folder that can be deployed to Vercel or Netlify.
 
 ## 📂 Project Structure
 
 ```
-.
-├── __tests__
-│   ├── Button.test.jsx
-│   ├── Card.test.jsx
-│   ├── Counter.test.jsx
-│   ├── FormInput.test.jsx
-│   └── Input.test.jsx
-├── components
-│   ├── Button.jsx
-│   ├── Card.jsx
-│   ├── Counter.jsx
-│   ├── FormInput.jsx
-│   └── Input.jsx
-├── cypress
-│   └── e2e
-│       └── home.cy.js   # Cypress end-to-end test specs
-├── jest.config.js       # Jest configuration mapped to Next.js
-├── jest.setup.js        # Imports standard jest-dom matchers
+testing-suite/
+├── .storybook/
+│   ├── main.js                # Storybook config (stories, addons, framework)
+│   └── preview.js             # Global CSS, dark/light backgrounds, controls
+├── components/
+│   ├── Button.jsx             # Button component
+│   ├── Button.stories.jsx     # Button stories (Primary, Secondary, Disabled)
+│   ├── Card.jsx               # Card component
+│   ├── Counter.jsx            # Counter component (stateful)
+│   ├── Counter.stories.jsx    # Counter story
+│   ├── FormInput.jsx          # FormInput component (controlled input)
+│   ├── Input.jsx              # Input component
+│   └── Input.stories.jsx      # Input stories (Default, WithValue)
+├── __tests__/
+│   ├── Button.test.jsx        # Button renders with label prop
+│   ├── Card.test.jsx          # Card renders with title prop
+│   ├── Counter.test.jsx       # Counter increments on click (userEvent)
+│   ├── FormInput.test.jsx     # FormInput updates on typing (userEvent)
+│   └── Input.test.jsx         # Input renders with placeholder prop
+├── cypress/
+│   └── e2e/
+│       └── home.cy.js         # E2E test for homepage
+├── jest.config.cjs            # Jest configuration for Next.js
+├── jest.setup.js              # Imports @testing-library/jest-dom
+├── cypress.config.js          # Cypress configuration
 └── package.json
 ```
+
+## 🧪 Test Results
+
+```
+ PASS  __tests__/Button.test.jsx
+ PASS  __tests__/Card.test.jsx
+ PASS  __tests__/Input.test.jsx
+ PASS  __tests__/Counter.test.jsx
+ PASS  __tests__/FormInput.test.jsx
+
+Test Suites: 5 passed, 5 total
+Tests:       5 passed, 5 total
+```
+
+## 🌐 Deployment
+
+- **Storybook** deployed on Vercel with build command `npm run build-storybook` and output directory `storybook-static`
