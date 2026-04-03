@@ -1,7 +1,8 @@
-export default function Button({ label, variant = "primary", disabled }) {
+export default function Button({ label, variant = "primary", disabled, onClick }) {
   return (
     <button
       disabled={disabled}
+      onClick={onClick}
       className={`px-4 py-2 rounded ${
         variant === "primary"
           ? "bg-blue-500 text-white"

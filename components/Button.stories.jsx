@@ -9,6 +9,7 @@ export default {
       options: ["primary", "secondary"],
     },
     disabled: { control: "boolean" },
+    onClick: { action: "clicked" },
   },
 };
 
